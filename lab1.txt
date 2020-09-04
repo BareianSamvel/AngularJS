@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="personCtrl">
+First Number: <input type="number" ng-model="a"><br>
+Last Number: <input type="number" ng-model="b"><br>
+<br>
+Summa: {{summa()}}<br>
+Razn: {{raznosti()}}<br>
+Proizv: {{proizv()}}<br>
+Delenie: {{del()}}<br>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function($scope) {
+    $scope.a = 32;
+    $scope.b = 74;
+    $scope.summa = function() {
+    return $scope.a + $scope.b;
+    };
+    $scope.raznosti = function() {
+    return $scope.a - $scope.b;
+    };
+    $scope.proizv = function() {
+    return $scope.a * $scope.b;
+    };
+    $scope.del = function() {
+    if($scope.b == 0) {
+        return "Deliti na 0 nelizia";
+        }
+    return $scope.a / $scope.b;
+    };
+});
+</script>
+
+</body>
+</html>
