@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+	<h3>Check your mark for this homework!</h3>
+	<p><b>Enter your surname here:</b> <input ng-model="x.surname" type="text"></p>
+	<p ng-repeat="x in customers | filter : {'surname' : x.surname}">{{x.surname + " " + x.name + " has " + x.mark + " for this task."}}</p>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.customers = [
+        {"name" : "Gariuc", "surname" : "Ivan", "mark" : "10"},
+        {"name" : "Bareian", "surname" : "Samvel", "mark" : "10"},
+        {"name" : "Snegur", "surname" : "Valeria", "mark" : "10"},
+        {"name" : "Ivanov", "surname" : "Alex", "mark" : "10"},
+        {"name" : "Volosanovschi", "surname" : "Andrei", "mark" : "10"}
+    ];
+});
+</script>
+
+</body>
+</html>
