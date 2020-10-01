@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl" style="margin: 4vw;">
+
+	<h3 style="text-align: center;">Заполните форму, чтобы стать абитуриентом!</h3>
+    
+    <br>
+
+	<form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-1">Фамилия: </label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="surname" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-1">Имя: </label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-1">Дата рождения: </label>
+            <div class="col-sm-10">
+                <input type="date" ng-model="dateBirth" class="form-control">
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="control-label col-sm-1">Образование: </label>
+            <div class="col-sm-10">
+                <select ng-model="educType" class="form-control">
+                    <option>Среднее</option>
+                    <option>Среднее специальное</option>
+                    <option>Проф. техническое</option>
+                    <option>Высшее</option>
+               </select>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="control-label col-sm-1">Бакалауреат? </label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                <input type="radio" name="educ" value="yes" ng-model="yes"> Да
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="educ" value="no" ng-click="yes = false"> Нет
+            </label>
+            </div>
+        </div>
+    
+    
+        <!-- блок отображается только если выбран radio Да -->
+        <div ng-show="yes">
+            <div class="form-group">
+                <label class="control-label col-sm-1">Факультет: </label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="fac" value="Химия" ng-model="fac"> Химия
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="fac" value="Математика" ng-model="fac"> Математика
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="fac" value="Биология" ng-model="fac"> Биология
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="fac" value="Информатика" ng-model="fac"> Информатика
+                    </label>
+                </div>
+            </div>
+                            
+            <!-- специальности отображаются в зависимости от выбранного факультета -->
+            <div class="form-group">
+                <label class="control-label col-sm-1">Специальность: </label>
+                <div class="col-sm-10">
+                    <select ng-model="facType" class="form-control">
+                        <option ng-show="fac == 'Химия'">Органическая химия</option>
+                        <option ng-show="fac == 'Химия'">Неорганическая химия</option>
+                        <option ng-show="fac == 'Математика'">Высшая математика</option>
+                        <option ng-show="fac == 'Биология'">Анатомия</option>
+                        <option ng-show="fac == 'Биология'">Цитология и генетика</option>
+                        <option ng-show="fac == 'Биология'">Молекулярная биология</option>
+                        <option ng-show="fac == 'Информатика'">Web-технологии</option>
+                        <option ng-show="fac == 'Информатика'">Кибер-безопасность</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label class="control-label col-sm-1">Оценка по БАКу: </label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control"  ng-model="mark" min=1 max=10></p>
+                </div> 
+            </div> 
+        </div>
+
+        <!-- по нажатию на кнопку отображается введенная информация -->
+        <input type="submit" class="btn btn-block" ng-disabled="!yes" ng-click="showInfo = true" value="Согласен">
+        <input type="reset" class="btn btn-block" value="Отказ">
+	</form>
+
+	<br><br>
+    
+    <div ng-show="showInfo">
+    	<h3 style="text-align: center;">О Вас:</h3>
+        
+		<p style="text-align: center;">{{ surname + " " + name + ", " }}{{ dateBirth | date : "dd.MM.yyyy" }}{{ ", получил(a) " + educType + " образование и поступает на факультет " + fac + ", специальность " + facType + " с оценкой " + mark + "." }}</p>
+        
+        <p style="text-align: center;" ng-show="mark > 8">Отлично!</p>
+        <p style="text-align: center;" ng-hide="mark > 6">Слабовато...</p>
+    <div>
+
+</div>
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope) {
+    		
+	});
+</script>
+
+</body>
+</html>
